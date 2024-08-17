@@ -37,11 +37,14 @@ resource "aws_route_table" "my-route-table" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.my-public-igw.id
   }
+
+  tags = {
+    "name" = "my-route-table"
+  }
 }
 # Create Route Table Association
 resource "aws_route_table_association" "my-rt-associate" {
   count          = length(var.subnet_cidr)
   subnet_id      = aws_subnet.my_subnets[count.index].id
   route_table_id = aws_route_table.my-route-table.id
-
 }
