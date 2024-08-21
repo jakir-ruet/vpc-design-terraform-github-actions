@@ -1,19 +1,19 @@
 name: CI-CD Pipeline for Terraform
-runs-on: ${{ github.actor }} has triggered the pipeline
 
 on:
   push:
-    branches: # Fixed spelling from 'branchs' to 'branches'
+    branches:
       - 'master'
 
 env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }} # Changed to AWS_ACCESS_KEY_ID for consistency with AWS standards
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   build-infra:
     name: ci-cd-pipeline-terraform
-    runs-on: ubuntu-latest # Changed 'run-on' to 'runs-on'
+    runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -38,10 +38,10 @@ jobs:
 
       - name: Terraform Apply
         id: apply
-        run: terraform apply -auto-approve # Added -auto-approve to avoid prompts
+        run: terraform apply -auto-approve
         working-directory: ./terraform
 
       - name: Terraform Destroy
         id: destroy
-        run: terraform destroy -auto-approve # Added -auto-approve to avoid prompts
+        run: terraform destroy -auto-approve
         working-directory: ./terraform
