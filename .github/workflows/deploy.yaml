@@ -34,3 +34,7 @@ jobs:
            id: apply
            run: terraform apply
            working-directory: ./terraform
+         - name: Terraform destroy
+           id: destroy
+           run: terraform destroy
+           working-directory: ./terraform
